@@ -26,12 +26,13 @@ def qsort(arr,low,high):
         pi = i+1
         print("thread {0} is sorting {1} and pivot is {2}".format(threading.current_thread(), arr[low:high+1], pivot))
 
-        arr_itr.append(arr[0:n])
+
 
         lthread = None
         rthread = None
 
         print "The array after pivot positioning ", arr
+        arr_itr.append([arr[low:pi],arr[pi],arr[pi+1:high+1]])
         lthread = Thread(target = lambda: qsort(arr,low,pi-1))
         lthread.start()
 
@@ -44,15 +45,24 @@ def qsort(arr,low,high):
 
 
 '''testing below'''
-ls = [10,5,1,3,6,4,9,2,8,16,7]
+ls = [10,5,1,3,6,4,15,9,2,13,8,12,16,7]
 n=len(ls)
 root = tk.Tk()
 res = qsort(ls, 0, len(ls) - 1)
 
 for each in arr_itr:
-    labels.append( tk.Label(root, text=" ".join( str(each) ) ) )
+    print " --> ",each[0],each[1],each[2], " "
+    labels.append( tk.Label(root, text=" ".join( str(each[0]) ) ) )
+    labels.append(tk.Label(root, text = "Pivot is: "+str(each[1])) )
+    labels.append(tk.Label(root, text =" ".join(str(each[2]))) )
 
-for each in labels:
-    each.pack()
+i=0
+while(i<len(labels)-1):
+
+    labels[i].grid(row=i,column=0)
+    labels[i+1].grid(row=i,column=2)
+    labels[i+2].grid(row=i,column=4)
+    i=i+3
+
 root.mainloop()
 print(res)
