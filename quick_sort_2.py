@@ -3,6 +3,12 @@ import threading
 import time
 import thread
 
+import Tkinter as tk
+
+arr_itr = []
+labels=[]
+index=0
+
 def qsort(arr,low,high):
 
     if low < high:
@@ -19,6 +25,9 @@ def qsort(arr,low,high):
 
         pi = i+1
         print("thread {0} is sorting {1} and pivot is {2}".format(threading.current_thread(), arr[low:high+1], pivot))
+
+        arr_itr.append(arr[0:n])
+
         lthread = None
         rthread = None
 
@@ -36,5 +45,14 @@ def qsort(arr,low,high):
 
 '''testing below'''
 ls = [10,5,1,3,6,4,9,2,8,16,7]
+n=len(ls)
+root = tk.Tk()
 res = qsort(ls, 0, len(ls) - 1)
+
+for each in arr_itr:
+    labels.append( tk.Label(root, text=" ".join( str(each) ) ) )
+
+for each in labels:
+    each.pack()
+root.mainloop()
 print(res)
