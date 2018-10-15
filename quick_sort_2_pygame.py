@@ -59,13 +59,9 @@ def qsort(arr,low,high):
 
 def displayarray(arr,pi):
     image = pygame.Surface((width - width/5,height - height/5))
-    below_image = pygame.Surface((width/5,height/5))
     rect = image.get_rect()
     rect.top = height/10
     rect.left =  width/10
-    below_rect = below_image.get_rect()
-    below_rect.top = height/10
-    below_rect.left =  width/10
     width_per_bar = rect.width/len(arr) - 2
 
     l = 0
@@ -87,7 +83,6 @@ def displayarray(arr,pi):
 
     screen.fill(black)
     screen.blit(image,rect)
-    screen.blit(below_image,below_rect)
     pygame.display.update()
     clock.tick(FPS)
 
