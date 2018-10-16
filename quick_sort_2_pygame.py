@@ -9,7 +9,7 @@ import pygame
 from pygame.locals import *
 
 scr_size = (width,height) = (900,600)
-FPS = 1
+FPS = 2
 screen = pygame.display.set_mode(scr_size)
 clock = pygame.time.Clock()
 black = (0,0,0)
@@ -87,7 +87,7 @@ def displayarray(arr,pi):
     clock.tick(FPS)
 
 '''testing below'''
-ls = [10,5,1,3,6,4,15,9,2,13,8,12,16,7]
+ls = [100,5,1,3,6,4,15,9,2,13,8,12,16,7]
 n=len(ls)
 while True:
     for event in pygame.event.get():
