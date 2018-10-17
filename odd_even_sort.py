@@ -9,7 +9,7 @@ import thread
 import numpy as np
 
 import Tkinter as tk
-import pygame
+import pygame,sys
 from pygame.locals import *
 
 scr_size = (width,height) = (900,600)
@@ -20,6 +20,7 @@ black = (0,0,0)
 white = (255,255,255)
 green = (0,255,0)
 blue = (0,0,255)
+red = (255,0,0)
 
 orange = (255,165,0)
 light_blue = (110,255,255)
@@ -87,6 +88,8 @@ def oddEvenSort_thread(arr,out_queue):
 
     print "hello",arr,"hello\n"
 
+
+
     out_queue.put(arr)
 
 
@@ -125,9 +128,16 @@ def oddEvenSort(arr):
     mergeSort(afterOE)
 
     print "after mergesort", afterOE
+    arr = afterOE[:]
+
+    if(sorted(arr)== arr):
+        print "SORTED."
+        sys.exit()
+        sorted(arr)
 
 
 def displayarray(arr,opt):
+    basicfont = pygame.font.SysFont(None, 30)
     image = pygame.Surface((width - width/5,height - height/5))
     rect = image.get_rect()
     rect.top = height/10
@@ -136,6 +146,9 @@ def displayarray(arr,opt):
 
     l = 0
     mid = len(arr)/2 -1
+
+    const_width = width_per_bar
+
     for k in range(0,rect.width,width_per_bar + 2):
         bar = pygame.Surface((width_per_bar,arr[l]*10))
         bar_rect = bar.get_rect()
@@ -152,20 +165,32 @@ def displayarray(arr,opt):
         bar_rect.bottom = rect.height
         bar_rect.left = k
 
+        ele_text =  basicfont.render(str(arr[l]), True, red)
+        ele_textrect = ele_text.get_rect()
+        ele_textrect.centerx = bar_rect.left + const_width/2
+        ele_textrect.centery = bar_rect.bottom - 10
+
         image.blit(bar,bar_rect)
+        image.blit(ele_text,ele_textrect)
         l += 1
         if l == len(arr):
             break
 
-
+    str_text = 'Array size: '+str(len(arr))
+    text = basicfont.render(str_text, True, red)
+    textrect = text.get_rect()
+    textrect.centerx = screen.get_rect().centerx
+    textrect.centery = height/10
     screen.fill(black)
     screen.blit(image,rect)
+    screen.blit(text,textrect)
     pygame.display.update()
     clock.tick(FPS)
 
 '''testing below'''
 arr = [100,5,1,3,6,16,4,15,9,30,2,13,8,12,16,7]
 n=len(arr)
+pygame.init()
 while True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -175,6 +200,7 @@ while True:
         if event.type == pygame.KEYUP:
             pass
         if sorted(arr) != arr:
+            print "Again."
             oddEvenSort(arr)
         else:
             print "DONE!"
