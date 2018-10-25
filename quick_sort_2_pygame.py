@@ -61,7 +61,7 @@ def qsort(arr,low,high):
         if rthread is not None: rthread.join()
         return arr
 
-def displayarray(arr, hlt, pi):
+def displayarray_qs(arr, hlt, pi):
     basicfont = pygame.font.SysFont(None, 30)
     image = pygame.Surface((width - width/5,height - height/5))
     rect = image.get_rect()
