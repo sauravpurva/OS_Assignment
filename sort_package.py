@@ -1,3 +1,10 @@
+'''
+Sort Package [Odd Even Sort, Merge Sort, Quick Sort]- Animator.
+Done by:
+Harini R (COE16B018)
+Rahul N (CED16I025)
+Saurav Purva (CED16I029)
+'''
 from threading import Thread
 import threading as th
 import time
